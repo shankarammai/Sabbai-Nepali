@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+    <div id="app">
+	  <div>
+          <!-- My audio player here-->          
+	  <div>
+	  <template>
+  <div>
+    <md-tabs class="md-primary" md-alignment="centered">
+      <md-tab id="tab-home" md-icon="home"></md-tab>
+      <!-- <md-tab id="tab-pages" md-icon="pages"></md-tab>
+      <md-tab id="tab-posts" md-icon="/assets/icon-whatshot.svg"></md-tab> -->
+      <md-tab id="tab-favorites" md-icon="favorite"></md-tab>
+    </md-tabs>
+  </div>
+</template>
+<audio ref="audioplayer" src="http://kalika-stream.softnep.com:7740/;stream.nsv&type=mp3" autoplay="True" controls></audio>
+
+<div class="active-purple-4 mb-4">
+  <input class="form-control" id="fmsearchinput" onkeyup="findFM()" type="text" placeholder="Type FM Name Here.." aria-label="Search">
+  </div>
+  <div id="allfms">
+ <div v-for="fm in allnepalistations">
+  <a href="#" @click="fmchoosed(fm.url,fm.name,fm.image)">
+    <md-list class="md-triple-line">
+      <md-list-item>
+        <md-avatar>
+          <img v-bind:src="fm.image" alt="fm.name">
+        </md-avatar>
+        <div class="md-list-item-text">
+          <span>{{fm.name}}</span>
+        </div>
+		</a>
+  </div>
+  </div>
+
+<script>
+  export default {
+    name: 'TabIcons'
+  }
+</script>
+
+<style lang="scss" scoped>
+  .md-tabs + .md-tabs {
+    margin-top: 24px;
+  }
+</style>
+
+<script>
+    $(document).ready(function(){
+      $("#fmsearchinput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#allfms *").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
+
+	
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material"></script>
+	<script src="data.js"></script>
+    <script>
+	
+      Vue.use(VueMaterial.default)
+
+      new Vue({
+        el: '#app',
+		data:{
+		allnepalistations,
+		currentfm:null,
+		currenturl:null,
+		currentimage:null,
+		},
+		methods:{
+    fmchoosed: function(url,name,image){
+		this.currentfm=name
+		this.currenturl=url
+		this.currentimage=image
+     var player = this.$refs.audioplayer;
+     player.src=this.currenturl
+		 player.play()
+    }
+    
+		}
+      })
+    </script>
+  </body>
+</html>
