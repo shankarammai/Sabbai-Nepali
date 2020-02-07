@@ -20,13 +20,13 @@ var allnepalistations=[
 {
     url:"http://streaming.hamropatro.com:8004/;stream.nsv&amp;type=mp3&amp;volume=50",
     name:"Sagarmatha FM",
-    image:""
+    image:"https://cdn-radiotime-logos.tunein.com/s104277q.png"
 
 },
 {
 	url:"http://streaming.hamropatro.com:8631/;stream.mp3",
 	name:"Image FM",
-	image:""
+	image:"https://cdn-profiles.tunein.com/s48028/images/logoq.png"
 },
 
 {
